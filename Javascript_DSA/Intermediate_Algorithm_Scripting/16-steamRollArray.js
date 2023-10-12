@@ -4,23 +4,14 @@ function steamrollArray(arr) {
     let newArray = [];
 
     for (let i = 0; i < arr.length; i++) {
-        let currentElement;
 
-        currentElement = arr[i];
+        let currentElement = arr[i];
 
-        if (typeof currentElement == "object") {
-            if (Array.isArray(currentElement)) {
-                currentElement = steamrollArray(currentElement);
-            }
-            // else {
-            //     currentElement = JSON.stringify(currentElement);
-            // }
-        }
-        if (Array.isArray(currentElement)) newArray = newArray.concat(currentElement);
-        else {
-            newArray.push(currentElement);
+        if (Array.isArray(currentElement)) {
+            currentElement = steamrollArray(currentElement);
         }
 
+        newArray = newArray.concat(currentElement)
     }
 
     return newArray;
