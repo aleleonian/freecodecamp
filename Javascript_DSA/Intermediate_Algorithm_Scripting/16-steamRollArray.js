@@ -61,4 +61,13 @@ This approach achieves the same result as the original function but doesn't rely
 
 It provides a custom, recursive solution for flattening nested arrays.
 
+Takeaway:
+ChatGPT hizo algo parecido a lo que yo hice inicialmente pero sin recurrir a una variable global.
+Nomás que resolvió todo dentro de la función principal. En vez de usar una variable global, usó
+una "global" dentro de la función y la función recursiva también la definió dentro de la función
+principal.
+Not bad.
+En vez de hacer malabares con los resulados, una vez que ChatGPT llega al "hueso" después de 
+bucear en las distintas capas de arrays, "salva" el dato empujándolo a al array definido afuera
+de la función recursiva. Nice.
 */
