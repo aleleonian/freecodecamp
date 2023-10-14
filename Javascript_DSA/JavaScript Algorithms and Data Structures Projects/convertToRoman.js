@@ -19,40 +19,37 @@ function convertToRoman(num) {
     if (Number.isNaN(num)) {
         return false;
     }
-    const unidad = getUnidad(num);
+    let translatedNumber = "";
+    let multiplier = 0;
+    String(num).split("").reverse().forEach((numChar, index) => {
+        switch (index) {
+            case 0:
+                translatedNumber += translateNumber(romanUnidades, numChar) + "-";
+                break;
+            case 1:
+                translatedNumber += translateNumber(romanDecenas, numChar) + "-";
+                break;
+            case 2:
+                translatedNumber += translateNumber(romanCentenas, numChar) + "-";
+                break;
+            case 3:
+                translatedNumber += translateMillarEnAdelante(numChar) + "-";
+                break;
+            default:
+                if (multiplier == 0) multiplier = 10;
+                else {
+                    multiplier *= 10;
+                }
+                numChar = String(Number(numChar) * multiplier);
+                translatedNumber += translateMillarEnAdelante(numChar) + "-";
+                break;
+        }
 
-    const decena = getDecena(num);
+    }
+    );
 
-    const centena = getCentena(num);
+    return translatedNumber.split("-").reverse().join("");
 
-    const millar = getMillar(num);
-
-    const translatedUnidad = translateNumber(romanUnidades, unidad);
-
-    const translatedDecena = translateNumber(romanDecenas, decena);
-
-    const translatedCentena = translateNumber(romanCentenas, centena);
-
-    const translatedMillar = translateMillarEnAdelante(millar);
-
-    const translatedNumber = `${translatedMillar}${translatedCentena}${translatedDecena}${translatedUnidad}`;
-
-    return translatedNumber;
-
-}
-
-
-function getUnidad(number) {
-    return number % 10
-}
-function getDecena(number) {
-    return (number % 100 - number % 10) / 10;
-}
-function getCentena(number) {
-    return (number % 1000 - number % 100) / 100;
-}
-function getMillar(number) {
-    return (number % 10000 - number % 1000) / 1000;
 }
 
 function translateNumber(romanLetterSet, number) {
@@ -102,4 +99,4 @@ function translateMillarEnAdelante(number) {
 }
 
 
-console.log(convertToRoman(19999));
+console.log(convertToRoman(399999));
