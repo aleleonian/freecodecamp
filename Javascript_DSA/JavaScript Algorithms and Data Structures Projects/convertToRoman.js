@@ -1,3 +1,19 @@
+const romanUnidades = {
+    1: "I",
+    5: "V",
+    10: "X"
+}
+const romanDecenas = {
+    1: "X",
+    5: "L",
+    10: "C"
+}
+const romanCentenas = {
+    1: "C",
+    5: "D",
+    10: "M"
+}
+
 function convertToRoman(num) {
 
     if (Number.isNaN(num)) {
@@ -11,28 +27,17 @@ function convertToRoman(num) {
 
     const millar = getMillar(num);
 
-    console.log("unidad->" + unidad);
-    console.log("decena->" + decena);
-    console.log("centena->" + centena);
-    console.log("millar->" + millar);
+    const translatedUnidad = translateNumber(romanUnidades, unidad);
 
-    const translatedUnidad = translateUnidad(unidad);
+    const translatedDecena = translateNumber(romanDecenas, decena);
 
-    const translatedDecena = translateDecena(decena);
+    const translatedCentena = translateNumber(romanCentenas, centena);
 
-    const translatedCentena = translateCentena(centena);
-
-    const translatedMillar = translateMillar(millar);
-
-    console.log("translatedUnidad->" + translatedUnidad);
-    console.log("translatedDecena->" + translatedDecena);
-    console.log("translatedDCentena->" + translatedCentena);
-    console.log("translatedMillar->" + translatedMillar);
+    const translatedMillar = translateMillarEnAdelante(millar);
 
     const translatedNumber = `${translatedMillar}${translatedCentena}${translatedDecena}${translatedUnidad}`;
 
     return translatedNumber;
-    // (12350 % 10000 - 12350 % 1000 ) / 1000
 
 }
 
@@ -50,95 +55,45 @@ function getMillar(number) {
     return (number % 10000 - number % 1000) / 1000;
 }
 
+function translateNumber(romanLetterSet, number) {
 
-function translateDecena(number) {
     let translatedNumber = "";
-    switch (number) {
-        case 0:
-            break;
-        case 1:
-            translatedNumber = "X";
-            break;
-        case 2:
-            translatedNumber = "XX";
-            break;
-        case 3:
-            translatedNumber = "XXX";
-            break;
-        case 4:
-            translatedNumber = "XL";
-            break;
-        case 5:
-            translatedNumber = "L";
-            break;
-        case 6:
-            translatedNumber = "LX";
-            break;
-        case 7:
-            translatedNumber = "LXX";
-            break;
-        case 8:
-            translatedNumber = "LXXX";
-            break;
-        case 9:
-            translatedNumber = "XC";
-            break;
 
+    if (number < 5) {
+        if (number == 4) {
+            translatedNumber = `${romanLetterSet[1]}${romanLetterSet[5]}`;
+        }
+        else {
+            translatedNumber = addNumbersToString(number, translatedNumber, romanLetterSet, 1);
+        }
+    }
+    else if (number == 5) {
+        translatedNumber = `${romanLetterSet[5]}`;
+    }
+    else {
+        if (number == 9) {
+            translatedNumber = `${romanLetterSet[1]}${romanLetterSet[10]}`;
+        }
+        else if (number == 10) {
+            translatedNumber = `${romanLetterSet[10]}`;
+        }
+        else {
+            translatedNumber = romanLetterSet[5] + addNumbersToString(number - 5, translatedNumber, romanLetterSet, 1);
+
+        }
     }
     return translatedNumber;
-}
-function translateUnidad(number) {
-    let translatedNumber = "";
-    switch (number) {
-        case 0:
-            break;
-        case 1:
-            translatedNumber = "I";
-            break;
-        case 2:
-            translatedNumber = "II";
-            break;
-        case 3:
-            translatedNumber = "III";
-            break;
-        case 4:
-            translatedNumber = "IV";
-            break;
-        case 5:
-            translatedNumber = "V";
-            break;
-        case 6:
-            translatedNumber = "VI";
-            break;
-        case 7:
-            translatedNumber = "VII";
-            break;
-        case 8:
-            translatedNumber = "VIII";
-            break;
-        case 9:
-            translatedNumber = "IX";
-            break;
 
+    function addNumbersToString(number, string, letterSet, whichRomanEquivalent) {
+        for (let i = 0; i < number; i++) {
+            string += letterSet[whichRomanEquivalent];
+        }
+        return string;
     }
-    return translatedNumber;
+
 }
-function translateCentena(number) {
-    let romanCentenas = {
-        0: "",
-        1: "C",
-        2: "CC",
-        3: "CCC",
-        4: "CD",
-        5: "D",
-        6: "DC",
-        7: "DCC",
-        8: "DCCC",
-        9: "CM"
-    }
-    return romanCentenas[number];
-}
-function translateMillar(number) {
+
+function translateMillarEnAdelante(number) {
     let translatedMillar = "";
     for (let i = 0; i < number; i++) {
         translatedMillar += "M";
@@ -146,9 +101,5 @@ function translateMillar(number) {
     return translatedMillar;
 }
 
-// millar = (numero % 10000 - numero % 1000 ) / 1000
-// centenas = (numero % 1000 - numero % 100) / 100;
-// decenas = (numero % 100 - numero % 10) / 10;
-// unidades = numero % 10;
 
-convertToRoman(2222);
+console.log(convertToRoman(19999));
