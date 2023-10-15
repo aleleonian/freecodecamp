@@ -8,12 +8,7 @@ function rot13(str) {
         let currentChar = str[i];
         if (!currentChar.match(/\W+|_|\s+/)) {
             let charPosition = alphabet.indexOf(currentChar);
-            if (charPosition + 13 >= alphabet.length) {
-                charPosition = (charPosition + 13) % alphabet.length;
-            }
-            else {
-                charPosition += 13;
-            }
+            charPosition = (charPosition + 13) % alphabet.length;
             currentChar = alphabet[charPosition];
         }
         translatedString += currentChar;
