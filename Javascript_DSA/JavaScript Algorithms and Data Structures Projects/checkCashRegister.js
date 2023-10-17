@@ -45,15 +45,17 @@ function determineHowToPay(change, currencies, cid) {
     let canGiveChange = false;
 
     for (const currency in currencies) {
-        //first i have to determine which value i can use to pay that change
+        // if i'm done finding change, stop the loop.
+        if (change == 0) break;
 
-        if (change >= currencies[currency]) {
+        //first i have to determine which value i can use to pay that change
+        else if (change >= currencies[currency]) {
             //once i found which kind of value i can use to pay for that change
             //i have to determine if i have enough of that value to pay for that change
-            let howMuchOfThisCurrency = getChangeFor(currency, cid)[1];
+            let howMuchOfThisCurrency = getCidAmountFor(currency, cid)[1];
 
             payLikeThis.set(currency, 0);
-            
+
             while (howMuchOfThisCurrency > 0 && change >= currencies[currency]) {
                 payLikeThis.set(currency, payLikeThis.get(currency) + currencies[currency]);
                 howMuchOfThisCurrency -= currencies[currency];
@@ -91,7 +93,7 @@ function properlyRound(number) {
     return Number((number * 100 / 100).toFixed(2));
 
 }
-function getChangeFor(value, cid) {
+function getCidAmountFor(value, cid) {
     return cid.filter(currency => currency[0] === value)[0];
 }
 console.log(checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]));
