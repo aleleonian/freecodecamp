@@ -1,31 +1,56 @@
-function permAlone(str) {
 
-  let permutations = [];
-  str = str.split("");
+function permAlone(string) {
 
-  str.forEach(character => {
+  //result inicialmente contienen la primer letra de mi string
+  // 'a'
+  let permutations = [string[0]];
 
-    let stringWithoutThisChar = [...str];
+  //itero el string 'le'
+  //por cada letra que no es la primera, voy a permutar la primera
+  //que a su vez con cada iteración se va a ir transformando en un string
+  //osea va a dejar de ser letra nomás
+  const restOfString = string.slice(1);
 
-    stringWithoutThisChar.splice(stringWithoutThisChar.indexOf(character), 1);
+  for (let i = 0; i < restOfString.length; i++) {
+    const currentChar = restOfString[i];
+    let newResult = [];
 
-    let aPermutation = "";
+    //voy a iterar el array donde se van guardando las permutaciones
+    for (let x = 0; x < permutations.length; x++) {
+      let string = permutations[x];
 
-    for (let i = 0; i < stringWithoutThisChar.length; i++) {
-      aPermutation = character + stringWithoutThisChar.join("");
-      permutations.push(aPermutation);
-      stringWithoutThisChar.unshift(stringWithoutThisChar.pop());
+      //por cada string en mi array de de permutaciones
+      //voy a agregar char en las distintas posiciones
+
+      for (let y = 0; y <= string.length; y++) {
+        // el .slice(0,0) antes del string si luego le pego .slice(0)
+        // .slice(0) es una copia del string, remember.    
+        // newString.slice(0,0) + "MyCHAR" + mystr.slice(0)
+        // mystr.slice(0,1) + "MyCHAR" + mystr.slice(1)
+        // la gracia es que podemos ir pegando letras en todo momento de un string
+        // si iteramos el length del string y vamos apendeando con la formula
+        // myString.slice(0,i) + char + myString.slice(i)
+
+        let newString = string.slice(0, y) + currentChar + string.slice(y);
+        newResult.push(newString);
+
+      }
     }
-
-  });
-
-  console.log(permutations);
-}
-
-function permutate(array) {
-  for (let i = 0; i < array.length; i++) {
-    array.unshift(array.pop());
-    console.log(array);
+    permutations = newResult;
   }
+
+  let howManyWordsWithRepeatingChars = permutations.reduce((accumulator, string) => {
+    for (let i = 0; i < string.length; i++) {
+      if (string[i] === string[i + 1]) {
+        accumulator++;
+        break;
+      }
+    }
+    return accumulator;
+  }, 0);
+
+  return permutations.length - howManyWordsWithRepeatingChars;
 }
-permAlone('ale');
+
+
+console.log(permAlone("aab"));
