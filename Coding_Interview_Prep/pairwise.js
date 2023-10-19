@@ -2,14 +2,17 @@ function pairwise(arr, arg) {
 
     let usedIndexes = new Set();
 
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length; i++) {
         const currentElement = arr[i];
-        for (let x = 0; x < arr.length - 1; x++) {
+        if (usedIndexes.has(i)) continue;
+        for (let x = 0; x < arr.length; x++) {
             if (x == i) continue;
             const possiblePair = arr[x];
+            if (usedIndexes.has(x)) continue;
             if (currentElement + possiblePair == arg) {
                 usedIndexes.add(i);
                 usedIndexes.add(x);
+                break;
             }
         }
     }
@@ -19,4 +22,4 @@ function pairwise(arr, arg) {
     }, 0);
 }
 
-console.log(pairwise([1, 4, 2, 3, 0, 5], 7));
+console.log(pairwise([0, 0, 0, 0, 1, 1], 1));
