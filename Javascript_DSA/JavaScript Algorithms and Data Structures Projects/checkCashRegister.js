@@ -17,30 +17,27 @@ function checkCashRegister(price, cash, cid) {
     let moneyInDrawer = totalCidMoney(cid);
 
     // do i have enough money to give change back?
-    if (moneyInDrawer < change) {
+    if (moneyInDrawer < change) return respond("INSUFFICIENT_FUNDS", []);
 
-        return respond("INSUFFICIENT_FUNDS", []);
-    }
     //got to determine whether i have exact change or i have options
+    if (doWeHaveExactChange(cid, change)) {
+        return respond("CLOSED", cid);
+    }
     else {
-        if (doWeHaveExactChange(cid, change)) {
-            return respond("CLOSED", cid);
+        //let's figure out how to give the change
+        const canWeGiveChangeAndHow = tryToGiveChange(change, currencies, cid);
+
+        if (canWeGiveChangeAndHow.canGiveChange) {
+            return respond("OPEN", canWeGiveChangeAndHow.changeArray);
         }
         else {
-            //let's figure out how to give the change
-            const canWeReturnChangeAndHow = determineHowToPay(change, currencies, cid);
-
-            if (canWeReturnChangeAndHow.canGiveChange) {
-                return respond("OPEN", canWeReturnChangeAndHow.changeArray);
-            }
-            else {
-                return respond("INSUFFICIENT_FUNDS", []);
-            }
+            return respond("INSUFFICIENT_FUNDS", []);
         }
     }
+
 }
 
-function determineHowToPay(change, currencies, cid) {
+function tryToGiveChange(change, currencies, cid) {
     let payLikeThis = new Map();
     let canGiveChange = false;
 
