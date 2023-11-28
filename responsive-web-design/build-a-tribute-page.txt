@@ -1,0 +1,28 @@
+** start of undefined **
+
+<link rel="stylesheet" href="styles.css">
+<main id="main">
+  <h1 id="title">Dai Vernon, The Professor.</h1>
+  <figure id="img-div">
+    <img id="image" src="https://magicorpproductions.com/wp-content/uploads/2019/05/dai-vernon-2-1.jpg" alt="Dai Vernon">
+    <figcaption id="img-caption">The man who fooled Houdini</figcaption>
+  </figure>
+  <div id="tribute-info">
+    <a id="tribute-link" href="https://en.wikipedia.org/wiki/Dai_Vernon" target=_blank>Dai Vernon</a>
+    David Frederick Wingfield Verner, better known by his stage names Dai Vernon or The Professor, was a Canadian
+    magician. Vernon's sleight of hand technique and knowledge, particularly with card tricks and close-up magic,
+    garnered him respect among fellow magicians, and he was a mentor to them.
+  </div>
+</main>
+
+** end of undefined **
+
+** start of undefined **
+
+#image {
+  max-width:100%;
+  display:block;
+}
+
+** end of undefined **
+
