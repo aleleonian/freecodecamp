@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  font-family: 'Lato', sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* flex-wrap:no-wrap; */
+  justify-content: space-around;
+  background-color: #eee;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  list-style: none;
+}
+
+#pricing {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 100px;
+}
+
+
+@media (max-width: 650px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  nav ul {
+    flex-direction: column;
+  }
+
+  body {
+    background-color: lightblue;
+  }
+
+  #pricing {
+    flex-direction: column;
+  }
+
+  .container {
+    margin: 0 20px;
+  }
+}
+
+nav {
+  width: 60vh;
+}
+
+#links {
+  display: inline-block;
+}
+
+.logo {
+  width: 50%;
+}
+
+.logo img {
+  max-width: 300px;
+}
+
+header a {
+  text-decoration: none;
+  color: #000;
+}
+
+.theForm {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.theForm input[type='email'] {
+  width: 100%;
+  max-width: 300px;
+  padding: 5px;
+}
+
+.theForm input[type='submit'] {
+  width: 100%;
+  max-width: 200px;
+  padding: 5px;
+  background-color: #f1c40f;
+  margin: 15px 0;
+  border: 0;
+}
+
+.theForm h2 {
+  margin-bottom: 20px;
+}
+
+.button {
+  border-radius: 5px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: row;
+  margin: 40px 0;
+}
+
+.icon {
+  color: darkorange;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px 10px;
+  width: 20%;
+}
+
+.description {
+  width: 80%;
+}
+
+.video {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.case {
+  border: 1px solid black;
+  width: 100vh;
+  margin: 0 10px;
+}
+
+#pricing .pricing-header {
+  background-color: #ddd;
+  padding: 20px 20px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.line {
+  text-align: center;
+}
+
+.line button {
+  margin: 10px 0;
+  background-color: #f1c40f;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#pricing h3 {
+  text-align: center;
+}
